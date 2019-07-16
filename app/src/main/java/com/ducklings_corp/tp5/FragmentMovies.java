@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,10 +19,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import com.google.gson.*;
 
-public class FragmentMovies extends Fragment {
+public class FragmentMovies extends Fragment implements View.OnClickListener {
     String baseUrl = "http://www.omdbapi.com/?apikey=ecb0530b&%s";
     String requestUrl = "";
     ListView listResults;
+    Button goBack;
     View view;
     SearchData searchData;
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
@@ -31,6 +33,9 @@ public class FragmentMovies extends Fragment {
         searchData = ((MainActivity)getActivity()).parametersRequest();
 
         listResults = view.findViewById(R.id.listResults);
+        goBack = view.findViewById(R.id.goBackToTheFuture);
+
+        goBack.setOnClickListener(this);
 
         if(searchData.type==false) {
             Log.d("lol", "onCreateView: Creating URL");
@@ -86,5 +91,12 @@ public class FragmentMovies extends Fragment {
         if(!isOk) {
             view.findViewById(R.id.showError).setVisibility(View.VISIBLE);
         }
+        for(int i=0;i<responses;i++) {
+
+        }
+    }
+
+    public void onClick(View view){
+        ((MainActivity)getActivity()).backToSearch();
     }
 }

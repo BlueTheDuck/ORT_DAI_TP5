@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        createFragment(R.id.fragment,new FragmentSearch(),"search");
+        backToSearch();
     }
 
     private void createFragment(int id, Fragment fragment, String tag) {
@@ -33,5 +33,10 @@ public class MainActivity extends Activity {
     }
     public SearchData parametersRequest() {
         return _searchData;
+    }
+
+    public void backToSearch() {
+        createFragment(R.id.fragment,new FragmentSearch(),"search");
+        _searchData = null;
     }
 }
