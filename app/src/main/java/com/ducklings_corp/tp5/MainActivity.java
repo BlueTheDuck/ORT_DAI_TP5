@@ -5,13 +5,13 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 public class MainActivity extends Activity {
     FragmentManager manager;
     FragmentTransaction transaction;
-    private int _searchType;
-    private String _text;
+    private SearchData _searchData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +27,11 @@ public class MainActivity extends Activity {
         transaction.commit();
     }
 
-    public void submitSearch(int searchType,String text) {
+    public void submitSearch(SearchData searchData) {
         createFragment(R.id.fragment,new FragmentMovies(),"movies");
-        _searchType = searchType;
-        _text = text;
+        _searchData = searchData;
     }
-    public void parametersRequest() {
-        //hay que hacer una clase con dos atributos
+    public SearchData parametersRequest() {
+        return _searchData;
     }
 }

@@ -30,4 +30,14 @@
         android:layout_height="wrap_content"
         android:text="Buscar"
         android:id="@+id/doSearch"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/showError"
+        android:background="#FF0000"
+        android:textColor="#FFFFFF"
+        android:textSize="11pt"
+        android:text="Complete Todos Los Datos"
+        android:textAlignment="center"
+        android:visibility="gone"/>
 </LinearLayout>
