@@ -9,17 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+
 import com.google.gson.*;
 
 public class FragmentMovies extends Fragment implements View.OnClickListener {
+    ArrayList<Movie> movieArrayList;
     String baseUrl = "http://www.omdbapi.com/?apikey=ecb0530b&%s";
     String requestUrl = "";
     ListView listResults;
@@ -27,10 +27,11 @@ public class FragmentMovies extends Fragment implements View.OnClickListener {
     View view;
     SearchData searchData;
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
-        Log.d("lol","Creating movies");
+        Log.d("lol","Creating movieArrayList");
         view = layoutInflater.inflate(R.layout.movies_layout,viewGroup,false);
 
         searchData = ((MainActivity)getActivity()).parametersRequest();
+        movieArrayList = new ArrayList<>();
 
         listResults = view.findViewById(R.id.listResults);
         goBack = view.findViewById(R.id.goBackToTheFuture);
@@ -43,6 +44,9 @@ public class FragmentMovies extends Fragment implements View.OnClickListener {
         } else {
             throw new Error("lol");
         }
+
+        new GetMovies().execute();
+
 
         return view;
     }
@@ -75,9 +79,8 @@ public class FragmentMovies extends Fragment implements View.OnClickListener {
         protected void onPostExecute(Void v) {
             super.onPostExecute(v);
 
-            /*ListView listPlaces;
-            listPlaces = view.findViewById(R.id.places);
-            listPlaces.setAdapter(placesAdapter);*/
+            MovieList movieList = new MovieList(movieArrayList,getActivity());
+            listResults.setAdapter(movieList);
         }
     }
 
@@ -86,13 +89,19 @@ public class FragmentMovies extends Fragment implements View.OnClickListener {
         JsonObject movieObject = jsonParser.parse(reader).getAsJsonObject();
 
         JsonArray listMovies = movieObject.get("Search").getAsJsonArray();
-        int responses = movieObject.get("totalResults").getAsInt();
         boolean isOk = movieObject.get("Response").getAsBoolean();
         if(!isOk) {
             view.findViewById(R.id.showError).setVisibility(View.VISIBLE);
         }
-        for(int i=0;i<responses;i++) {
-
+        for(int i=0;i<listMovies.size();i++) {
+            JsonObject movieJson = listMovies.get(i).getAsJsonObject();
+            Movie movie = new Movie();
+            movie.title = movieJson.get("Title").getAsString();
+            movie.year = movieJson.get("Year").getAsInt();
+            movie.id =  movieJson.get("imdbID").getAsString();
+            movie.posterUrl = movieJson.get("Poster").getAsString();
+            Log.d("Json", String.format("Pelicula: %s | ID: %s", movie.title,i));
+            movieArrayList.add(movie);
         }
     }
 

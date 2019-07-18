@@ -1,11 +1,11 @@
+package com.ducklings_corp.tp5;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
-import com.ducklings_corp.tp5.R;
 
 import java.util.ArrayList;
 
@@ -43,7 +43,7 @@ public class MovieList extends BaseAdapter {
         view = layoutInflater.inflate(R.layout.movie_list_item, parent, false);
 
         ((TextView)view.findViewById(R.id.movieTitle)).setText(getItem(position).title);
-        ((TextView)view.findViewById(R.id.movieYear)).setText(getItem(position).year);
+        ((TextView)view.findViewById(R.id.movieYear)).setText(getItem(position).year+"");
 
         return view;
     }

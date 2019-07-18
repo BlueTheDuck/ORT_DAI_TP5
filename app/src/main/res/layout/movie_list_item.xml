@@ -7,12 +7,15 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:id="@+id/moviePoster"/>
+        android:id="@+id/moviePoster"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/movieTitle"
-        app:layout_constraintLeft_toRightOf="@id/moviePoster"/>
+        app:layout_constraintLeft_toRightOf="@+id/moviePoster"
+        app:layout_constraintTop_toTopOf="parent"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

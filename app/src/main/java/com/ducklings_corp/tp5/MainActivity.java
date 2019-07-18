@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
     }
 
     public void submitSearch(SearchData searchData) {
-        createFragment(R.id.fragment,new FragmentMovies(),"movies");
+        createFragment(R.id.fragment,new FragmentMovies(),"movieArrayList");
         _searchData = searchData;
     }
     public SearchData parametersRequest() {

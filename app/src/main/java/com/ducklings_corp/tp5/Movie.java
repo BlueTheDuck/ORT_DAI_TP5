@@ -1,3 +1,5 @@
+package com.ducklings_corp.tp5;
+
 import android.graphics.Bitmap;
 
 public class Movie {
