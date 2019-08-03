@@ -5,22 +5,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:id="@+id/moviePoster"
-        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/movieTitle"
-        app:layout_constraintLeft_toRightOf="@+id/moviePoster"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="@id/moviePoster"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="TITLE"
+        android:textSize="12pt"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/movieYear"
-        app:layout_constraintLeft_toRightOf="@id/moviePoster"
-        app:layout_constraintTop_toBottomOf="@id/movieTitle"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movieTitle"
+        android:layout_marginRight="20dp"
+        android:text="0000"
+        android:textSize="9pt"/>
 
 </android.support.constraint.ConstraintLayout>

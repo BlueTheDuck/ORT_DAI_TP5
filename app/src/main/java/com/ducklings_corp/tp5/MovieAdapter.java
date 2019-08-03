@@ -1,6 +1,7 @@
 package com.ducklings_corp.tp5;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +10,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class MovieList extends BaseAdapter {
+public class MovieAdapter extends BaseAdapter {
     private ArrayList<Movie> _movies;
     private Context _context;
 
-    public MovieList (ArrayList<Movie> movies, Context context){
+    public MovieAdapter(ArrayList<Movie> movies, Context context){
         _movies = movies;
         _context = context;
     }

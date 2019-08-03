@@ -28,8 +28,8 @@ public class MainActivity extends Activity {
     }
 
     public void submitSearch(SearchData searchData) {
-        createFragment(R.id.fragment,new FragmentMovies(),"movieArrayList");
         _searchData = searchData;
+        createFragment(R.id.fragment,new FragmentMovies(),"movieArrayList");
     }
     public SearchData parametersRequest() {
         return _searchData;

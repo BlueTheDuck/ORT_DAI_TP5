@@ -38,7 +38,7 @@ public class FragmentMovies extends Fragment implements View.OnClickListener {
 
         goBack.setOnClickListener(this);
 
-        if(searchData.type==false) {
+        if(!searchData.type) {
             Log.d("lol", "onCreateView: Creating URL");
             requestUrl = String.format(baseUrl,"s="+searchData.text);
         } else {
@@ -79,7 +79,7 @@ public class FragmentMovies extends Fragment implements View.OnClickListener {
         protected void onPostExecute(Void v) {
             super.onPostExecute(v);
 
-            MovieList movieList = new MovieList(movieArrayList,getActivity());
+            MovieAdapter movieList = new MovieAdapter(movieArrayList,getActivity());
             listResults.setAdapter(movieList);
         }
     }
