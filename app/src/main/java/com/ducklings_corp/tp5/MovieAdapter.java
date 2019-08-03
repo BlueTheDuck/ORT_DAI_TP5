@@ -46,6 +46,7 @@ public class MovieAdapter extends BaseAdapter {
         ((TextView)view.findViewById(R.id.movieTitle)).setText(getItem(position).title);
         ((TextView)view.findViewById(R.id.movieYear)).setText(getItem(position).year+"");
 
+
         return view;
     }
 
