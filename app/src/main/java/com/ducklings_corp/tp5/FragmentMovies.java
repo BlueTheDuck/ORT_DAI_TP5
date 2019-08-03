@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -101,7 +102,16 @@ public class FragmentMovies extends Fragment implements View.OnClickListener {
             movie.id =  movieJson.get("imdbID").getAsString();
             movie.posterUrl = movieJson.get("Poster").getAsString();
             Log.d("Json", String.format("Pelicula: %s | ID: %s", movie.title,i));
+            movie.execute();
             movieArrayList.add(movie);
+        }
+        for(Movie movie: movieArrayList) {
+            try {
+                //movie.poster = movie.get();
+                Log.d("Json",String.format("%s finished downloading poster",movie.title));
+            } catch (Exception e) {
+                Log.d("Json","Error in async task downloading image");
+            }
         }
     }
 
