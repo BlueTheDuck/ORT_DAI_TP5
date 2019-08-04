@@ -12,11 +12,14 @@ public class MainActivity extends Activity {
     FragmentManager manager;
     FragmentTransaction transaction;
     private SearchData _searchData;
+    private Movie _movie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        _searchData = null;
+        _movie = null;
         backToSearch();
     }
 
@@ -34,6 +37,19 @@ public class MainActivity extends Activity {
     public SearchData parametersRequest() {
         return _searchData;
     }
+
+
+    public void displayMovieDetails(Movie movie) {
+        _movie = movie;
+        createFragment(R.id.fragment,new FragmentMovieDetails(),"movieDetails");
+    }
+    public Movie movieRequest() {
+        if(_movie==null) {
+            throw new Error("No movie was chosen");
+        }
+        return _movie;
+    }
+
 
     public void backToSearch() {
         createFragment(R.id.fragment,new FragmentSearch(),"search");

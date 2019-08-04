@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -34,10 +35,16 @@ public class FragmentMovies extends Fragment implements View.OnClickListener {
         searchData = ((MainActivity)getActivity()).parametersRequest();
         movieArrayList = new ArrayList<>();
 
-        listResults = view.findViewById(R.id.listResults);
         goBack = view.findViewById(R.id.goBackToTheFuture);
+        listResults = view.findViewById(R.id.listResults);
 
         goBack.setOnClickListener(this);
+        listResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ((MainActivity)getActivity()).displayMovieDetails(movieArrayList.get(position));
+            }
+        });
 
         if(!searchData.type) {
             Log.d("lol", "onCreateView: Creating URL");

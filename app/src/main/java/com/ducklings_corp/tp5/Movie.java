@@ -7,16 +7,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.io.BufferedInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Movie extends AsyncTask<Void,Void, Bitmap> {
+public class Movie extends AsyncTask<Void, Void, Bitmap> {
     public String title;
+    public String plot;
+    public int year;
     public String posterUrl;
     public String id;
-    public int year;
     public Bitmap poster;
 
     protected Bitmap doInBackground(Void... voids) {
@@ -31,10 +36,28 @@ public class Movie extends AsyncTask<Void,Void, Bitmap> {
                 image = BitmapFactory.decodeStream(buffer);
                 cnx.disconnect();
             }
+
+            url = new URL(String.format("http://www.omdbapi.com/?apikey=ecb0530b&i=%s",id));
+            cnx = (HttpURLConnection) url.openConnection();
+            if(cnx.getResponseCode()==200) {
+                InputStream body;
+                InputStreamReader reader;
+
+                body = cnx.getInputStream();
+                reader = new InputStreamReader(body,"UTF-8");
+                parseJson(reader);
+                cnx.disconnect();
+            }
         } catch (Exception e) {
             Log.d("image",e.getMessage());
         }
         return image;
+    }
+
+    private void parseJson(InputStreamReader reader) {
+        JsonParser jsonParser = new JsonParser();
+        JsonObject movieObject = jsonParser.parse(reader).getAsJsonObject();
+        plot =  movieObject.get("plot").getAsString();
     }
 
     protected void onPostExecute(Bitmap image) {
