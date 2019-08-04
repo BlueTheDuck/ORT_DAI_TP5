@@ -10,21 +10,6 @@
         android:hint="Escriba aqui"
         android:textSize="12pt"
         android:id="@+id/textSearch"/>
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/searchType">
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Busqueda general"
-            android:id="@+id/searchGeneral"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Busqueda por ID/Titulo"
-            android:id="@+id/searchId"/>
-    </RadioGroup>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

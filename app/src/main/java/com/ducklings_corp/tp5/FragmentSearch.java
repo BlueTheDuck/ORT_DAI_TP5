@@ -14,8 +14,6 @@ import android.widget.TextView;
 
 public class FragmentSearch extends Fragment implements View.OnClickListener {
     Button doSearch;
-    RadioButton searchGeneral, searchId;
-    RadioGroup searchType;
     EditText textSearch;
     TextView showError;
     View view;
@@ -23,9 +21,6 @@ public class FragmentSearch extends Fragment implements View.OnClickListener {
         view = layoutInflater.inflate(R.layout.search_layout,viewGroup,false);
 
         doSearch = view.findViewById(R.id.doSearch);
-        searchGeneral = view.findViewById(R.id.searchGeneral);
-        searchId = view.findViewById(R.id.searchId);
-        searchType = view.findViewById(R.id.searchType);
         textSearch = view.findViewById(R.id.textSearch);
         showError = view.findViewById(R.id.showError);
 
@@ -38,13 +33,9 @@ public class FragmentSearch extends Fragment implements View.OnClickListener {
         Log.d("log", "submting");
         if (textSearch.getText().toString().isEmpty()){
             showError.setVisibility(View.VISIBLE);
-        } else if (searchType.getCheckedRadioButtonId()==-1){
-            showError.setVisibility(View.VISIBLE);
-        }else{
-            SearchData searchData = new SearchData();
-            searchData.text = textSearch.getText().toString();
-            searchData.type = searchType.getCheckedRadioButtonId()==R.id.searchId;
-            ((MainActivity)getActivity()).submitSearch(searchData);
+        } else{
+            String searchText = textSearch.getText().toString();
+            ((MainActivity)getActivity()).submitSearch(searchText);
         }
     }
 }

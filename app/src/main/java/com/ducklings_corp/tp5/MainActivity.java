@@ -11,14 +11,14 @@ import android.view.View;
 public class MainActivity extends Activity {
     FragmentManager manager;
     FragmentTransaction transaction;
-    private SearchData _searchData;
+    private String _searchText;
     private Movie _movie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        _searchData = null;
+        _searchText = null;
         _movie = null;
         backToSearch();
     }
@@ -30,12 +30,12 @@ public class MainActivity extends Activity {
         transaction.commit();
     }
 
-    public void submitSearch(SearchData searchData) {
-        _searchData = searchData;
+    public void submitSearch(String searchText) {
+        _searchText = searchText;
         createFragment(R.id.fragment,new FragmentMovies(),"movieArrayList");
     }
-    public SearchData parametersRequest() {
-        return _searchData;
+    public String parametersRequest() {
+        return _searchText;
     }
 
 
@@ -53,6 +53,7 @@ public class MainActivity extends Activity {
 
     public void backToSearch() {
         createFragment(R.id.fragment,new FragmentSearch(),"search");
-        _searchData = null;
+        _searchText = null;
+        _movie = null;
     }
 }

@@ -13,7 +13,6 @@ import android.widget.ListView;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,12 +26,12 @@ public class FragmentMovies extends Fragment implements View.OnClickListener {
     ListView listResults;
     Button goBack;
     View view;
-    SearchData searchData;
+    String searchText;
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
         Log.d("lol","Creating movieArrayList");
         view = layoutInflater.inflate(R.layout.movies_layout,viewGroup,false);
 
-        searchData = ((MainActivity)getActivity()).parametersRequest();
+        searchText = ((MainActivity)getActivity()).parametersRequest();
         movieArrayList = new ArrayList<>();
 
         goBack = view.findViewById(R.id.goBackToTheFuture);
@@ -46,12 +45,9 @@ public class FragmentMovies extends Fragment implements View.OnClickListener {
             }
         });
 
-        if(!searchData.type) {
-            Log.d("lol", "onCreateView: Creating URL");
-            requestUrl = String.format(baseUrl,"s="+searchData.text);
-        } else {
-            throw new Error("lol");
-        }
+
+        Log.d("lol", "onCreateView: Creating URL");
+        requestUrl = String.format(baseUrl,"s="+ searchText);
 
         new GetMovies().execute();
 
