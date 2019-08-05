@@ -57,7 +57,8 @@ public class Movie extends AsyncTask<Void, Void, Bitmap> {
     private void parseJson(InputStreamReader reader) {
         JsonParser jsonParser = new JsonParser();
         JsonObject movieObject = jsonParser.parse(reader).getAsJsonObject();
-        plot =  movieObject.get("plot").getAsString();
+        plot = movieObject.get("Plot").getAsString();
+        Log.d("Json","plot");
     }
 
     protected void onPostExecute(Bitmap image) {
